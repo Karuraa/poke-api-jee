@@ -1,10 +1,15 @@
 package fr.efrei.pokemon.services;
 
+import fr.efrei.pokemon.dto.CreatePokemon;
+import fr.efrei.pokemon.dto.CreateShop;
+import fr.efrei.pokemon.models.Item;
 import fr.efrei.pokemon.models.Pokemon;
+import fr.efrei.pokemon.models.Shop;
 import fr.efrei.pokemon.repositories.PokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,6 +39,15 @@ public class PokemonService {
     // Controller -> Service -> Repository -> Entité -> BDD
     public void save(Pokemon pokemon) {
         // INSERT INTO pokemon VALUES (:name, :level, :type);
+        pokemonRepository.save(pokemon);
+    }
+
+    public void save(CreatePokemon pokemonBody) {
+
+        Pokemon pokemon = new Pokemon();
+        pokemon.setName(pokemonBody.getName());
+        pokemon.setLevel(pokemonBody.getLevel());
+        pokemon.setType(pokemonBody.getType());
         pokemonRepository.save(pokemon);
     }
 
